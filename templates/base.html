@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <title>Home Page</title>
+</head>
+<!-- Add additional CSS in static file -->
+{% load static %}
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+
+<body>
+
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+        <div class="logo_block">
+            <div class="logo_img">
+                <img src="{% static 'images/quiz.png' %}" alt="logo">
+            </div>
+
+        </div>
+    <a class="nav-link active" href="{% url 'home' %}"><h2>Home</h2></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
+            aria-expanded="true">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div id="navb" class="navbar-collapse collapse hide">
+
+        <a class="nav-link active" href="{% url 'quiz' %}"><h3>Quiz App</h3></a>
+
+        {% if user.is_authenticated %}
+            <a class="nav-link active"
+               href="{% url 'create_quiz' %}"><h3>Quiz Create</h3></a>
+
+    <a class="nav-link active"
+       href="{% url 'admin:index' %}"><h3> {{ site_header|default:_('Django administration') }}</h3></a>
+        {% endif %}
+    </div>
+
+    <div id="" class="navbar-brand d-flex align-items-center">
+        <div class=""{{ request.user.username }}><h3>Hello: {{ user }}</h3></div>
+    </div>
+    {% if user.is_authenticated %}
+        <a class="nav-link active"
+           href="{% url 'logout' %}?next={{ request.path }}"><h3>Logout</h3></a>
+            {% else %}
+
+          <a class="nav-link active"
+           href="{% url 'login' %}?next={{ request.path }}"><h3>Login</h3></a>
+    {% endif %}
+
+</nav>
+
+{% block alert %}
+    {% if messages %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}
+                            {{ message.tags|title }}{% endif %}!</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock alert %}
+
+
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

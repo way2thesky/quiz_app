@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create question{% endblock %}
+{% block content %}
+<div class="container">
+
+ <br>
+    <hr>
+    <h1>Question</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.question }}<br>
+        <p>Correct Answer </p>
+        {{ form.is_true }}<br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <script src="{% static 'js/create_question.js' %}"></script>
+        <button type="button" class="btn btn-dark" onclick="RandomQuestion()">Random question</button> <br>
+
+    </form>
+</div>
+{% endblock %}

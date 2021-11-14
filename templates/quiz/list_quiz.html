@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}  Question | Quiz App  {% endblock title %}
+
+{% block content %}
+
+
+    <hr>
+    <h1>Quiz App</h1>
+        <hr>
+<div class="quiz">
+    <form action="{% url 'quiz' %}" method="post">
+        {% csrf_token %}
+
+        {{ formset.management_form }}
+
+
+        {% for form in formset %}
+
+           <b> <h4> {{ form.question_text }} </h4></b>
+
+            <table>
+                {{ form.as_table }}
+            </table>
+
+
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="button" class="btn btn-dark" href="{% url 'home' %}">Cancel </a><br>
+
+    </form>
+    </div>
+
+
+{% endblock %}
+
+
