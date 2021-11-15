@@ -14,6 +14,8 @@ def home(request):
 def quiz(request):
     AnswerFormset = formset_factory(AnswerForm, max_num=3, min_num=3)
     if request.method == "GET":
+        if len(Question.objects.all()) < 3:
+            return render(request, 'quiz/template_no_questions.html',)
         questions = Question.objects.order_by('?')[:3]
         formset = AnswerFormset(initial=[{'question': question} for question in questions])
     else:
