@@ -1,10 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
-from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
-from django.views import generic
-
+from django.shortcuts import render
 from .models import Question
 from .forms import QuestForm, AnswerForm
 from django.views.generic import CreateView
